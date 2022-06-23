@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.hometech.retrofitdaggerdemo.databinding.ProductItemBinding
+import com.hometech.retrofitdaggerdemo.retrofit.ProductAPI
 import com.hometech.retrofitdaggerdemo.retrofit.model.Product
 
 class ProductListAdapter(private val productList: List<Product>, private val context: Context) :
@@ -17,9 +19,16 @@ class ProductListAdapter(private val productList: List<Product>, private val con
     )
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val product:Product = productList[position]
         ProductItemBinding.bind(holder.itemView).apply {
-            productTextView.text = productList[position].title
+            productTextView.text = product.title
+            relativeLayout.setOnClickListener {
+
+                Toast.makeText(context, "Click $position - ${product.title}", Toast.LENGTH_SHORT).show()
+
+            }
         }
+
     }
 
     override fun getItemCount(): Int {

@@ -46,7 +46,7 @@ class ProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         productViewModel.productLiveData.observe(requireActivity()) {
-            Log.d("ProductList", "onViewCreated: $it")
+//            Log.d("ProductList", "onViewCreated: $it")
             val adapter = ProductListAdapter(it, requireActivity())
             binding.productRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
             binding.productRecyclerView.adapter = adapter
