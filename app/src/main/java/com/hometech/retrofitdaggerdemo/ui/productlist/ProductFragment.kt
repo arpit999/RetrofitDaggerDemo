@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hometech.retrofitdaggerdemo.MyApplication
 import com.hometech.retrofitdaggerdemo.databinding.FragmentProductBinding
+import com.hometech.retrofitdaggerdemo.retrofit.model.Product
 import javax.inject.Inject
 
 class ProductFragment : Fragment() {
+
 
     private lateinit var productViewModel: ProductViewModel
 
@@ -42,8 +45,12 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productViewModel.productLiveData.observe(requireActivity()){
-//            Log.d("ProductList", "onViewCreated: ${it.toString()}")
+        productViewModel.productLiveData.observe(requireActivity()) {
+            Log.d("ProductList", "onViewCreated: $it")
+            val adapter = ProductListAdapter(it, requireActivity())
+            binding.productRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+            binding.productRecyclerView.adapter = adapter
+
         }
 
     }
